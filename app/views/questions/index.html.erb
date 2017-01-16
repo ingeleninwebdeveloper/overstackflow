@@ -1,0 +1,18 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+
+      <div class="questions">
+        <% @questions.each do |question| %>
+        <div class="question clearfix">
+          <div class="question-details">
+            <span class="question-title"><%= link_to question.title, question %></span>
+            <span class="question-description"><%= question.description %></span>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
