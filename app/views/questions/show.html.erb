@@ -1,20 +1,21 @@
 
 
+<div class="question-page">
+
 
   <div class="container">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
     <h1><%= @question.title %></h1>
     <p><%= @question.description %></p>
-    <div class="actions">
-
+    
     <% if signed_in? && @question.user == current_user %>
-<div class="actions">
-  <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_question_path(@question) %>
-  <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, @question, method: :delete, data: { confirm: "¿Estás seguro de eliminar este producto?" } %>
-</div>
-<% end %>
-  
+
+    <div class="actions">
+      <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_question_path(@question) %>
+      <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, @question, method: :delete, data: { confirm: "¿Estás seguro de eliminar esta pregunta?" } %>
+    </div>
+    <% end %>
   </header>
 
   <div class="container">
@@ -22,30 +23,43 @@
       <div class="col-sm-10 col-sm-offset-1">
         <div class="votes">
           <h2>Votos</h2>
-        </div>
-
-        <div class="comments">
-          <h2>Respuestas</h2>
-
-
-          <% @question.answers.each do |answer| %>
-  <div class="panel panel-default">
-   <% if question.voted_by? current_user %>
-          <%= link_to question_vote_path(question), method: :delete, class: "question-upvote upvote-active" do %>
-            <span class="upvote-arrow"></span>
-            <span class="upvote-count"><%= question.votes.count %></span>
-          <% end %>
-        <% else %>
-          <%= link_to question_vote_path(question), method: :post, class: "question-upvote" do %>
-            <span class="upvote-arrow"></span>
-            <span class="upvote-count"><%= question.votes.count %></span>
-          <% end %>
-        <% end %>
-    <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> <%= answer.user.name %></header>
-    <div class="panel-body"><%= answer.description %></div>
-  </div>
+          <% @question.votes.each do |vote| %>
+  <img src="<%= Gravatar.new("#{vote.user.email}").image_url %>" class="img-circle" />
 <% end %>
 
+
+        </div>
+
+        <div class="answers">
+          <h2>Comentarios</h2>
+
+          <% @question.answers.each do |answer| %>
+          <div class="question clearfix">
+
+  <div class="panel panel-default">
+    <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> </header>
+    
+    <% if answer.voted_by? current_user %>
+      <%= link_to answer_vote_path(answer), method: :delete, class: "question-upvote upvote-active" do %>
+        <span class="upvote-arrow"></span>
+        <span class="upvote-count"><%= answer.votes.count %></span>
+      <% end %>
+    <% else %>
+      <%= link_to answer_vote_path(answer), method: :post, class: "question-upvote" do %>
+        <span class="upvote-arrow"></span>
+        <span class="upvote-count"><%= answer.votes.count %></span>
+      <% end %>
+    <% end %>
+
+
+
+
+
+
+    <div class="panel-body"><%= answer.description %></div>
+
+  </div>
+<% end %>
 <% if signed_in? %>
   <%= form_for [@question, @question.answers.build] do |f| %>
     <div class="form-group">
@@ -53,13 +67,12 @@
     </div>
 
     <div class="actions text-right">
-      <%= f.submit "Comentar", class: "btn btn-primary" %>
+      <%= f.submit "Responder", class: "btn btn-primary" %>
     </div>
   <% end %>
-<% end %>      
-
+<% end %>
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>

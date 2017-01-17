@@ -49,6 +49,10 @@ def update
 end
 
 
+
+
+
+
 private
   def question_params
     params.require(:question).permit(:title, :description)
