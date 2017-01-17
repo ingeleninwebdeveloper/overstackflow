@@ -1,16 +1,14 @@
 
+
 class VotesController < ApplicationController
 
 
-
+=begin
 	before_filter :load_votable
-
-	@vote=@votable.votes.create(params_vote)
-	
 
 	def create
   	@vote = @votable.votes.find(params[:vote])
- 	@votable.create(user: current_user)
+ 	@votable.votes.create(vote_params)
 
   	redirect_to root_path
 	end
@@ -27,10 +25,14 @@ class VotesController < ApplicationController
       end
 	end
 
+	def vote_params
+      params.require(:vote).permit(:votable_type, :votable_id, user_id: ?)
 end
 
+=end
 
-=begin
+
+
 
 
  
