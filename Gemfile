@@ -17,6 +17,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
 
  gem 'coffee-script-source', '1.8.0' 
+ gem 'acts_as_votable'
 
  gem 'annotate'
 

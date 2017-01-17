@@ -8,8 +8,8 @@ class Question < ApplicationRecord
 #validates :description, presence: true
 #validates :title, presence: true
 
-def voted_by?(user)
+
+ def voted_by?(user)
   votes.exists?(user: user)
 end
-
 end

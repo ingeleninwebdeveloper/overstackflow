@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
 	resources :users, only: [:new, :create]
 	resources :questions do
+		resource :vote, only: [:create, :destroy]
 		resources :answers, only: [:create]
+	end
+		resources :answers, only: [:create] do 
 		resource :vote, only: [:create, :destroy]
 	end
 
