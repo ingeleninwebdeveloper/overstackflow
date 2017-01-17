@@ -25,7 +25,28 @@
         </div>
 
         <div class="comments">
-          <h2>Comentarios</h2>
+          <h2>Respuestas</h2>
+
+
+          <% @question.answers.each do |answer| %>
+  <div class="panel panel-default">
+    <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> <%= answer.user.name %></header>
+    <div class="panel-body"><%= answer.description %></div>
+  </div>
+<% end %>
+
+<% if signed_in? %>
+  <%= form_for [@question, @question.answers.build] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :description, class: "form-control", placeholder: "Agregar comentario" %>
+    </div>
+
+    <div class="actions text-right">
+      <%= f.submit "Comentar", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+<% end %>      
+
         </div>
       </div>
     </div>

@@ -10,6 +10,11 @@
             <span class="question-title"><%= link_to question.title, question %></span>
             <span class="question-description"><%= question.description %></span>
           </div>
+
+          <div class="question-comments">
+           <span class="comment-count"><%= question.answers.count %></span>
+          </div>
+
         </div>
         <% end %>
       </div>
