@@ -1,0 +1,6 @@
+<% comments.each do |comment| %>
+    <div class="comment-body">
+        <span class="comment-description"><%= comment.body %></span>
+        <span class="comment-owner">Comentario realizado por <%= comment.user.name %></span>
+    </div>
+<% end %>

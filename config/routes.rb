@@ -9,12 +9,14 @@ Rails.application.routes.draw do
 	resources :users, only: [:new, :create]
 	resources :questions do
 		resource :vote, only: [:create, :destroy]
+		 resources :comments, only: [:create]
 		resources :answers, only: [:create]
 	end
 		resources :answers, only: [:create] do 
+			 resources :comments, only: [:create]
 		resource :vote, only: [:create, :destroy]
 	end
-
+post 'answer_comments', to: 'comments#create'
 
 	
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
