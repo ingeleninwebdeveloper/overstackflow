@@ -1,0 +1,30 @@
+<div class="mini-count">
+    <!--Se arma el metodo de ruta-->
+    <% methodVote = objectVote.class.to_s.downcase + "_vote_path" %>
+    <% if objectVote.voted_by? current_user %>
+        <!--El metodo send convierte un string en un metodo enviandole los parametros-->
+        <!--Ejemplo send(method, param1,...,paramN)-->
+        <% if signed_in? and objectVote.user_id != current_user.id %>
+            <%= link_to send(methodVote, objectVote, :commentable_type => objectVote.class.to_s, :commentable_id => objectVote.id), method: :delete, class: "question-upvote upvote-active" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= objectVote.votes.count %></span>
+            <% end %>
+        <% else %>    
+            <span class="upvote-count"><%= objectVote.votes.count %></span>
+        <% end %>
+    <% else %>
+        <% if signed_in? and objectVote.user_id != current_user.id %>
+            <%= link_to send(methodVote, objectVote, :commentable_type => objectVote.class.to_s, :commentable_id => objectVote.id), method: :post, class: "question-upvote" do %>
+                <span class="upvote-arrow"></span>
+                <span class="upvote-count"><%= objectVote.votes.count %></span>
+            <% end %>
+        <% else %>    
+            <span class="upvote-count"><%= objectVote.votes.count %></span>
+        <% end %>
+    <% end %>
+</div>
+<% if objectVote.voted_by? current_user %>
+    <div class="voted">Votos</div>
+<% else %>
+    <div>Votos</div>
+<% end %>

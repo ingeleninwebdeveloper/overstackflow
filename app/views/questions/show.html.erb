@@ -1,25 +1,24 @@
 
-
-<div class="question-page">
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-10 col-sm-offset-1">
-    <h1><%= @question.title %></h1>
-
-
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="question">
+        
+        <div class="question-title">
       
-
-
-      <div class="summary">
-            <div class="question-body">
-              <span class="question-description"><%= @question.description %></span>
+        
+        <div class="question-summary">
+          <div class="cp">
+            <div class="question-votes">
+              <%= render partial: "questions/vote", locals: {objectVote: @question} %>
             </div>
-
-
-    
-   <div class"comments">
+          </div>
+          
+          <div class="summary">
+            <div class="question-body">
+              <span class="question-description"><%= @question.description%></span>
+            </div>
+            
+            <div class"comments">
               <h3><%= @question.comments.count %> - Comentario(s)</h3>
             </div>
             
@@ -29,22 +28,26 @@
           </div>
         </div>
         
-        <div class="answers">
+        <div class="aquestion">
           <h3><%= @question.answers.count %> - Respuesta(s)</h3>
         </div>
         
         <% @question.answers.each do |answer| %>
         
-          <div class="answer-summary">
-            
+          <div class="question-summary">
+            <div class="cp">
+              <div class="question-votes">
+                <%= render partial: "questions/vote", locals: {objectVote: answer} %>
+              </div>
+            </div>
             
             <div class="summary">
               
-              <div class="answer-body">
-                <span class="answer-description"><%= answer.description %></span>
+              <div class="question-body">
+                <span class="question-description"><%= answer.description%></span>
               </div>
               
-              <div class"comments">
+              <div class= "comments">
                 <h3><%= answer.comments.count %> - Comentario(s)</h3>
               </div>
               
@@ -56,7 +59,7 @@
           
         <% end %>
       
-        <div class="form-answer">
+        <div class="form-question">
           
           <% if signed_in? %>
             <%= form_for [@question, @question.answers.build] do |f| %>
@@ -70,6 +73,7 @@
               </div>
             <% end %>
           <% end %>
+          
          
         </div>
         
