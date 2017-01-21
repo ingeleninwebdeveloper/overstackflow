@@ -1,61 +1,82 @@
 
-
-<div class="question-page">
-
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-10 col-sm-offset-1">
-    <h1><%= @question.title %></h1>
-    <p><%= @question.description %></p>
-    
-    <% if signed_in? && @question.user == current_user %>
-
-    <div class="actions">
-      <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_question_path(@question) %>
-      <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe, @question, method: :delete, data: { confirm: "¿Estás seguro de eliminar esta pregunta?" } %>
-    </div>
-    <% end %>
-  </header>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-10 col-sm-offset-1">
-        <div class="votes">
-          <h2>Votos</h2>
-          <% @question.votes.each do |vote| %>
-  <img src="<%= Gravatar.new("#{vote.user.email}").image_url %>" class="img-circle" />
-<% end %>
-
-
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <div class="question">
+        
+        <div class="question-title">
+      
+        
+        <div class="question-summary">
+          <div class="cp">
+            <div class="question-votes">
+              <%= render partial: "questions/vote", locals: {objectVote: @question} %>
+            </div>
+          </div>
+          
+          <div class="summary">
+            <div class="question-body">
+              <span class="question-description"><%= @question.description%></span>
+            </div>
+            
+            <div class"comments">
+              <h3><%= @question.comments.count %> - Comentario(s)</h3>
+            </div>
+            
+            <%= render partial: "questions/comments", locals: {comments: @question.comments} %>
+            <%= render partial: "questions/comments_form", locals: {objectComment: @question} %>
+            
+          </div>
         </div>
-
-        <div class="answers">
-          <h2>Comentarios</h2>
-
-          <% @question.answers.each do |answer| %>
-          <div class="question clearfix">
-
-  <div class="panel panel-default">
-    <header class="panel-heading"><img src="<%= Gravatar.new("#{answer.user.email}").image_url %>" class="img-circle" /> </header>
-    
-    
-    <div class="panel-body"><%= answer.description %></div>
-
-  </div>
-<% end %>
-<% if signed_in? %>
-  <%= form_for [@question, @question.answers.build] do |f| %>
-    <div class="form-group">
-      <%= f.text_area :description, class: "form-control", placeholder: "Agregar comentario" %>
-    </div>
-
-    <div class="actions text-right">
-      <%= f.submit "Responder", class: "btn btn-primary" %>
-    </div>
-  <% end %>
-<% end %>
+        
+        <div class="aquestion">
+          <h3><%= @question.answers.count %> - Respuesta(s)</h3>
         </div>
+        
+        <% @question.answers.each do |answer| %>
+        
+          <div class="question-summary">
+            <div class="cp">
+              <div class="question-votes">
+                <%= render partial: "questions/vote", locals: {objectVote: answer} %>
+              </div>
+            </div>
+            
+            <div class="summary">
+              
+              <div class="question-body">
+                <span class="question-description"><%= answer.description%></span>
+              </div>
+              
+              <div class= "comments">
+                <h3><%= answer.comments.count %> - Comentario(s)</h3>
+              </div>
+              
+              <%= render partial: "questions/comments", locals: {comments: answer.comments} %>
+              <%= render partial: "questions/comments_form", locals: {objectComment: answer} %>
+              
+            </div>   
+          </div>  
+          
+        <% end %>
+      
+        <div class="form-question">
+          
+          <% if signed_in? %>
+            <%= form_for [@question, @question.answers.build] do |f| %>
+            
+              <div class="form-group">
+                <%= f.text_area :description, class: "form-control", placeholder: "Agregar Respuesta" %>
+              </div>
+          
+              <div class="actions text-right">
+                <%= f.submit "Responder", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          <% end %>
+          
+         
+        </div>
+        
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 
+
 <div class="container">
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
@@ -7,29 +8,21 @@
         <% @questions.each do |question| %>
         <div class="question clearfix">
 
-   <% if question.voted_by? current_user %>
-          <%= link_to question_vote_path(question), method: :delete, class: "question-upvote upvote-active" do %>
-            <span class="upvote-arrow"></span>
-            <span class="upvote-count"><%= question.votes.count %></span>
-           
-            
-          <% end %>
-          <% else %>
-          <%= link_to question_vote_path(question), method: :post, class: "question-upvote" do %>
-            <span class="upvote-arrow"></span>
-            <span class="upvote-count"><%= question.votes.count %></span>
-              <%end %>
-          
-        <% end %>
-
+   
 
           <div class="question-details">
             <span class="question-title"><%= link_to question.title, question %></span>
-            <span class="question-description"><%= question.description %></span>
+           
+          </div>
+
+          <div class="question-comments">
+           <span class="comment-count"><%= question.votes.count %></span>
+           <span class="question-description">Votos</span>
           </div>
 
           <div class="question-comments">
            <span class="comment-count"><%= question.answers.count %></span>
+           <span class="question-description">Respuestas</span>
           </div>
 
         </div>

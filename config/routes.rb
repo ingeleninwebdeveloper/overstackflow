@@ -1,21 +1,32 @@
 Rails.application.routes.draw do
 
-	
-	root 'questions#index'
-	get 'login', to: 'sessions#new'
-  	post 'login', to: 'sessions#create'
-  	delete 'logout', to: 'sessions#destroy'
-
-	resources :users, only: [:new, :create]
-	resources :questions do
-		resource :vote, only: [:create, :destroy]
-		resources :answers, only: [:create]
-	end
-		resources :answers, only: [:create] do 
-		resource :vote, only: [:create, :destroy]
-	end
-
 
 	
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+get 'sessions/new'
+
+  # Configuracion rutas questions
+  root 'questions#index'
+  
+  resources :questions do
+	  resources :answers, only: [:create] # ruta de respuestas asociada a la pregunta
+	  resources :comments, only: [:create]
+	  resource :vote, only: [:create, :destroy]
+	end
+	
+	resources :answers do
+	  resources :comments, only: [:create]
+	  resource :vote, only: [:create, :destroy]
+	end
+  
+  # Configuracion rutas users -> Solo se permite new y create 
+  resources :users, only: [:new, :create]
+  
+  # Configuracion rutas login new, create y logout
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  
+  post 'answer_comments', to: 'comments#create'
+  
 end
+

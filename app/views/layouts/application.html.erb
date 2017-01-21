@@ -43,11 +43,11 @@
               <li><%= link_to "Login", login_path %></li>
             <% end %>
           </ul>
-          <form class="navbar-form navbar-right" role="search">
+          <%= form_tag(questions_path, :method => "get", class: "navbar-form navbar-right", id: "search-form") do %>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Buscar Pregunta" %>
             </div>
-          </form>
+          <% end %>
         </div><!-- /.navbar-collapse -->
       </div>
     </div>
