@@ -12,6 +12,7 @@
 
           <div class="question-details">
             <span class="question-title"><%= link_to question.title, question %></span>
+             <span class="question-description">Realizada por <%= question.user.email %> <%= time_ago_in_words question.created_at %></span>
            
           </div>
 
@@ -24,6 +25,13 @@
            <span class="comment-count"><%= question.answers.count %></span>
            <span class="question-description">Respuestas</span>
           </div>
+
+
+
+
+
+
+             
 
         </div>
         <% end %>

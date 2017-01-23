@@ -1,7 +1,7 @@
 <% if signed_in? %>
     <%= form_for [objectComment, objectComment.comments.build] do |f| %>
         <div class="form-group">
-            <%= f.text_area :body, class: "form-control", placeholder: "Agregar Comentario" %>
+            <%= f.text_area :description, class: "form-control", placeholder: "Agregar Comentario" %>
             <%= f.hidden_field :commentable_type, value: objectComment.class.to_s %>
             <%= f.hidden_field :commentable_id, value: objectComment.id %>
         </div>
@@ -11,3 +11,5 @@
         </div>
     <% end %>
 <% end %>
+
+
