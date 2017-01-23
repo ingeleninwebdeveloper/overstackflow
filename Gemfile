@@ -21,8 +21,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
  gem 'annotate'
 
-gem 'sqlite3'
- 	
 
  gem 'gravatar-ultimate'
 # Use Uglifier as compressor for JavaScript assets
@@ -49,6 +47,10 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 group :development, :test do
 
 
+
+gem 'sqlite3'
+ 	
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end
@@ -63,3 +65,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
