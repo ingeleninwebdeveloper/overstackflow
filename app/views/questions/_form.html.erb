@@ -15,11 +15,11 @@
 <% end %>
       <%= form_for @question do |f| %>
         <div class="form-group">
-          <%= f.text_field :title, class: "form-control input-lg", placeholder: "Ingresa el nombre del producto" %>
+          <%= f.text_field :title, class: "form-control input-lg", placeholder: "Ingresa la pregunta" %>
         </div>
        
         <div class="form-group">
-          <%= f.text_area :description, class: "form-control input-lg", placeholder: "Ingresa la descripción del producto" %>
+          <%= f.text_area :description, class: "form-control input-lg", placeholder: "Ingresa la descripción de la pregunta" %>
         </div>
         <div>
           <%= f.submit form_title, class: "btn btn-primary btn-lg btn-block" %>
